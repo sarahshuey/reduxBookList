@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { selectBook }  from '../actions/index';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { selectBook } from "../actions/index";
 //make sure action created flows through all reducers
-import { bindActionCreators } from 'redux';
-
+import { bindActionCreators } from "redux";
 
 class BookDetail extends Component {
-
   render() {
-    if(!this.props.book) {
-      return (
-        <div>Select a book to get started!</div>
-      )
+    if (!this.props.book) {
+      return <div>Select a book to get started!</div>;
     }
     return (
       <div className="col-md-4">
@@ -20,7 +16,10 @@ class BookDetail extends Component {
         <div>{this.props.book.pages} pages</div>
         <div>Author: {this.props.book.author}</div>
         <div>Price: ${this.props.book.price} USD</div>
-        <div>Published: {this.props.book.published_date} by {this.props.book.publisher}</div>
+        <div>
+          Published: {this.props.book.published_date} by{" "}
+          {this.props.book.publisher}
+        </div>
         <div>Genre: {this.props.book.category.join(", ")} </div>
       </div>
     );
@@ -30,9 +29,8 @@ class BookDetail extends Component {
 //activeBook reducer creates activeBook state.
 function mapStateToProps(state) {
   return {
-    book: state.activeBook,
+    book: state.activeBook
   };
 }
-
 
 export default connect(mapStateToProps)(BookDetail);

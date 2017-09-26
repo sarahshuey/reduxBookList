@@ -1,40 +1,31 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { selectBook }  from '../actions/index';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { selectBook } from "../actions/index";
 //make sure action created flows through all reducers
-import { bindActionCreators } from 'redux';
-
-
+import { bindActionCreators } from "redux";
 
 class BookList extends Component {
   render() {
-return this.props.books.map((book)=>{
-  return(
-    <li key={book.title}
-    onClick={()=> this.props.selectBook(book)}
-    className="list-book">
-    {book.title}
-    </li>
-  )
-})
+    style={
+      "display":"flex",
+      "flexDirection":"row"
+    }
     //must create a map function here to return the following:
+    let data = this.props.books;
+    let books = data.map(book => {
+      return (
+        <div key={book.id} className="container-fluid">
+          <li
+            onClick={() => this.props.selectBook(book)}
+            className="list-group-item" style={{listStyle:"none"}}
+          >
+            {book.title}
+          </li>
+        </div>
+      );
+    });
 
-
-    // ******************
-    //
-    //     <li
-    //       key={book.id}
-    //       onClick={() => this.props.selectBook(book)}
-    //       className="list-group-item">{book.title}</li>
-    //
-    // ******************
-
-    return (
-      <ul className="list-group col-sm-4">
-        {/* return your mapped array list items here */}
-        {this.renderList()}
-      </ul>
-    );
+    return <ul className="list-group col-sm-4">{books}</ul>;
   }
 }
 
@@ -42,9 +33,7 @@ function mapStateToProps(state) {
   console.log("mapstate", state.books);
   //what is returned will show up as props inside of BookList
   //this gives you access to books in props.. (books would be good for mapping)
-  return {
-    books: state.books,
-  };
+  return { books: state.books };
 }
 
 //anything returned from this function will end up as props on
@@ -52,7 +41,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   //whenever selectBook is called, result should be passed to
   //all of the reducers. (flows through dispatch function -- like a funnel)
-    return bindActionCreators({ selectBook: selectBook }, dispatch)
+  return bindActionCreators(
+    {
+      selectBook: selectBook
+    },
+    dispatch
+  );
 }
 
 //connect all functions to container component
