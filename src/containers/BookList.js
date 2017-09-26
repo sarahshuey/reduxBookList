@@ -6,15 +6,16 @@ import { bindActionCreators } from "redux";
 
 class BookList extends Component {
   render() {
-    style={
+    let style={
       "display":"flex",
-      "flexDirection":"row"
+      "flexDirection":"row",
+      "color":"#67b581"
     }
     //must create a map function here to return the following:
     let data = this.props.books;
     let books = data.map(book => {
       return (
-        <div key={book.id} className="container-fluid">
+        <div key={book.id} className="container-fluid" style={style}>
           <li
             onClick={() => this.props.selectBook(book)}
             className="list-group-item" style={{listStyle:"none"}}

@@ -7,11 +7,18 @@ import BookDetail from "../containers/BookDetail";
 
 class App extends Component {
   render() {
+    let style={
+      "display":"flex",
+      "flexDirection":"row",
+      "color":"#67b581"
+    }
     return (
-      <div className="row">
+      <div className="row" style={{color:"#67b581"}}>
         <h1>Books N' Roses: Appetite for Instruction</h1>
+        <div style={style}>
         <BookList />
         <BookDetail />
+        </div>
       </div>
     );
   }

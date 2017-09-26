@@ -6,11 +6,15 @@ import { bindActionCreators } from "redux";
 
 class BookDetail extends Component {
   render() {
+    let style={
+      "color":"#67b581",
+      "paddingLeft":"30px"
+    }
     if (!this.props.book) {
-      return <div>Select a book to get started!</div>;
+      return <div style={style}>Select a book to get started!</div>;
     }
     return (
-      <div className="col-md-4">
+      <div className="col-md-4" style={style}>
         <h3> Details for: </h3>
         <h4 className="title">{this.props.book.title}</h4>
         <div>{this.props.book.pages} pages</div>
